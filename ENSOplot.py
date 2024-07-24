@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Define the file path
-file_path = 'HurricaneData/ENSO.txt'  # Replace with the actual file path
+file_path = 'HurricaneData/ENSO_extended.txt'  # Replace with the actual file path
 
 # Read the file content
 with open(file_path, 'r') as file:
@@ -22,7 +22,7 @@ for line in lines:
         if year == 'from':
             continue
         # Filter the data to only include years from 1950 to 2024
-        if 1950 <= int(year) <= 2024:
+        if 1900 <= int(year) <= 2024:
             years.append(int(year))
             values.append([float(x) for x in parts[1:]])
     except ValueError:
@@ -52,7 +52,7 @@ for month in range(1, 13):
             width=0.07, color=colors, align='center')
 
 plt.xlabel('Year')
-plt.ylabel('MEI.V2')
+plt.ylabel('Anomaly')
 plt.title('Multivariate ENSO Index')
 plt.axhline(0, color='black', linewidth=0.8)
 plt.grid(True)
