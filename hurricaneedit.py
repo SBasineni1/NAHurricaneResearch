@@ -4,14 +4,14 @@ import pandas as pd
 df = pd.read_csv('HurricaneData/ibtracs.NA.list.v04r00.csv')
 
 # Filter rows where 'USA_SSHS' > 1
-filtered_df = df[df['USA_SSHS'] >= 1.0]
+filtered_df = df[df['USA_SSHS'] >= 0.0]
 
 # Display the filtered DataFrame
 print(filtered_df)
 
 
 
-filtered_df.to_csv('', index=False)
+filtered_df.to_csv('HurricaneData/HurricaneTracks.csv', index=False)
 
 
 

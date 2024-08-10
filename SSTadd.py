@@ -5,6 +5,7 @@ import numpy as np
 # Load the SST NetCDF file
 sst_file_path = 'HurricaneData/sst.mnmean.nc'
 sst_data = xr.open_dataset(sst_file_path)
+print(sst_data)
 
 # Clean up the lat/lon coordinates
 # Convert 0 to 360 longitude to -180 to 180
