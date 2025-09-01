@@ -1,2 +1,2 @@
 # North Atlantic Basin Hurricane Research
-An analysis 
+An analysis of climate oscillations on hurricane frequency in the North Atlantic Basin. Climate oscillations used: ENSO (El Niño, La Niña, Neutral), the Atlantic Multi-Decadal Oscillation (AMO), sea surface temperatures (SSTs), and Accumulated Cyclone Energy (ACE). This repository hosts the code used to generate plots and data analysis that was used in the research paper. 
