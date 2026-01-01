@@ -1,7 +1,14 @@
+"""
+Includes yearly monthly ACE values, computes annual ACE totals, and generates a bar chart of
+North Atlantic accumulated cyclone energy (ACE) for 1950–2022.
+
+Author: Suchit Basineni
+Date: 7/24/24
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Your data in string format
 data = """1950	0.0	0.0	0.0	0.0	0.0	0.0	0.0	63.2	93.8	52.3	2.0	0.0
 1951	5.4	0.0	0.0	0.0	16.1	0.0	0.0	24.3	57.8	17.4	0.0	5.3
 1952	0.0	1.3	0.0	0.0	0.0	0.0	0.0	10.3	32.4	21.6	3.5	0.0
@@ -76,29 +83,26 @@ data = """1950	0.0	0.0	0.0	0.0	0.0	0.0	0.0	63.2	93.8	52.3	2.0	0.0
 2021	0.0	0.0	0.0	0.0	0.8	2.5	9.9	31.2	74.8	21.9	4.4	0.0
 2022	0.0	0.0	0.0	0.0	0.0	1.6	1.3	0.0	76.2	5.4	10.2	0.0"""
 
-import matplotlib.pyplot as plt
-
-# Convert the data to a list of lists
 data = [list(map(float, line.split())) for line in data.split('\n')]
-
-# Extract years and the values
 years = [int(row[0]) for row in data]
 values = [row[1:] for row in data]
-
-# Sum the values in each row
 sums = [sum(row) for row in values]
 
-csfont = {'fontname':'sans-serif'}
-hfont = {'fontname':'sans-serif'}
+csfont = {'fontname': 'sans-serif'}
+hfont = {'fontname': 'sans-serif'}
 
-# Plot the results
 plt.figure(figsize=(10, 6))
-ax = plt.gca()  # Get the current axes
-ax.set_facecolor('#e8e8e8')  # Set the background color of the plot area
+ax = plt.gca()
+ax.set_facecolor('#e8e8e8')
 plt.bar(years, sums, color='#107AB0')
-plt.title('North Atlantic Accumulated Cyclone Energy (ACE) 1950-2022',**csfont, fontsize=12, fontweight='bold')
-plt.xlabel('Year',**hfont,fontsize=10, labelpad=7, fontweight='bold')
-plt.ylabel('Accumulated Cyclone Energy (ACE)',**hfont,fontsize=10, labelpad=10, fontweight='bold')
+plt.title(
+    'North Atlantic Accumulated Cyclone Energy (ACE) 1950-2022',
+    **csfont,
+    fontsize=12,
+    fontweight='bold'
+)
+plt.xlabel('Year', **hfont, fontsize=10, labelpad=7, fontweight='bold')
+plt.ylabel('Accumulated Cyclone Energy (ACE)', **hfont, fontsize=10, labelpad=10, fontweight='bold')
 plt.axhline(y=123, color='orange')
 plt.ylim(0, 300)
 plt.xlim(1949.5, 2022.5)
