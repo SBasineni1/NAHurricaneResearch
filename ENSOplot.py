@@ -43,6 +43,29 @@ for year in df_transposed.columns:
 
 df_long = pd.DataFrame(data_long, columns=['Year', 'Month', 'Value'])
 
+# Define the thresholds for each phase
+la_nina_threshold = -0.5
+el_nino_threshold = 0.5
+
+# Initialize counters for each phase
+la_nina_months = 0
+neutral_months = 0
+el_nino_months = 0
+
+# Iterate over the data and count the months for each phase
+for value in df_long['Value']:
+    if value < la_nina_threshold:
+        la_nina_months += 1
+    elif value > el_nino_threshold:
+        el_nino_months += 1
+    else:
+        neutral_months += 1
+
+# Print the results
+print(f"Total months of La Niña conditions (Value < {la_nina_threshold}): {la_nina_months}")
+print(f"Total months of ENSO Neutral conditions ({la_nina_threshold} <= Value <= {el_nino_threshold}): {neutral_months}")
+print(f"Total months of El Niño conditions (Value > {el_nino_threshold}): {el_nino_months}")
+
 # Plot
 plt.figure(figsize=(15, 8))
 for month in range(1, 13):
@@ -51,9 +74,14 @@ for month in range(1, 13):
     plt.bar(subset['Year'] + (month - 1) / 12, subset['Value'], 
             width=0.07, color=colors, align='center')
 
-plt.xlabel('Year')
-plt.ylabel('Anomaly')
-plt.title('Multivariate ENSO Index')
+# Remove the top and right borders
+
+# Set the x-axis limits to remove space
+plt.xlim([min(years), max(years)])
+
+plt.xlabel('Year', fontsize=10, labelpad=2, fontweight='bold')
+plt.ylabel('Anomaly', fontsize=10, labelpad=7, fontweight='bold')
+plt.title('Oceanic Niño Index (ONI)', fontsize=12, fontweight='bold')
 plt.axhline(0, color='black', linewidth=0.8)
 plt.grid(True)
 plt.tight_layout()

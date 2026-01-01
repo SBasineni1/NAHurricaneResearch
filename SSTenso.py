@@ -19,9 +19,9 @@ colors = enso.apply(lambda x: 'red' if x > 0.5 else ('blue' if x < -0.5 else 'gr
 # Create the scatter plot
 plt.figure(figsize=(10, 6))
 plt.scatter(sst, wind_speed, c=colors, alpha=0.5, s=5)
-plt.xlabel('Sea Surface Temperature (SST)')
-plt.ylabel('Hurricane Wind Speed')
-plt.title('Sea Surface Temperature vs. Hurricane Wind Speed with ENSO Values')
+plt.xlabel('Sea Surface Temperature (°C)', fontsize=10, labelpad=2, fontweight='bold')
+plt.ylabel('Hurricane Wind Speed', fontsize=10, labelpad=7, fontweight='bold')
+plt.title('Sea Surface Temperature vs. Hurricane Wind Speed with ENSO Values', fontsize=12, fontweight='bold')
 plt.grid(True)
 plt.ylim(0, max(wind_speed) + 10)  # Ensure y-axis starts at 0 and has some space above max value
 

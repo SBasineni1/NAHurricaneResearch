@@ -12,8 +12,13 @@ data = pd.read_csv(file_path, low_memory=False)
 # Ensure 'ISO_TIME' is in datetime format
 data['ISO_TIME'] = pd.to_datetime(data['ISO_TIME'], errors='coerce')
 
-# Filter data for the years 1950-1960
-data_filtered = data[data['ISO_TIME'].dt.year.between(2020, 2023)]
+# Filter data for the years 2010-2019
+data_filtered = data[data['ISO_TIME'].dt.year.between(1950, 2023)]
+
+# Filter data for El nino months
+data_filtered = data_filtered[data_filtered['ENSO_Value'] <= -0.5]
+
+
 
 # Convert latitude and longitude to numeric, coercing errors
 data_filtered['LAT'] = pd.to_numeric(data_filtered['LAT'], errors='coerce')
@@ -30,7 +35,7 @@ data_filtered = data_filtered[
 
 # Debugging output
 print(f"Total entries in the dataset: {len(data)}")
-print(f"Entries for the years 1950-1960: {len(data_filtered)}")
+print(f"Entries for the years 2010-2019 in October: {len(data_filtered)}")
 
 # Create a GeoDataFrame for points
 gdf_points = gpd.GeoDataFrame(data_filtered, 
@@ -74,7 +79,7 @@ gdf_lines = gpd.GeoDataFrame(lines, crs="EPSG:4326")
 if gdf_points.empty:
     print("No data available for plotting.")
 else:
-# Plotting
+    # Plotting
     fig, ax = plt.subplots(1, 1, figsize=(15, 15))
 
     # Plot lines with lower opacity
@@ -89,7 +94,7 @@ else:
     ax.set_xlim([-100, -50])
     ax.set_ylim([10, 50])
 
-    plt.title('2020-2023 North Atlantic Tropical Cyclones', fontsize=12, fontweight='bold')
+    plt.title('1950-2019 La Niña North Atlantic Hurricanes', fontsize=12, fontweight='bold')
     plt.xlabel('Longitude', fontsize=10, labelpad=7, fontweight='bold')
     plt.ylabel('Latitude', fontsize=10, labelpad=2, fontweight='bold')
 
@@ -104,7 +109,7 @@ else:
     ax.legend(handles=legend_elements, loc='lower right')
 
     # Save the plot to a file
-    plt.savefig('hurricane_1950_1960_atlantic.png')
+    plt.savefig('hurricane_2010_2019_october_atlantic.png')
 
     # Show the plot
     plt.show()
